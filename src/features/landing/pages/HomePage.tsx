@@ -69,9 +69,9 @@ const HomePage = () => {
             <div className='absolute left-1/2 top-1/2 grid h-64 w-64 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-blue-500/10 shadow-[0_0_100px_rgba(37,99,235,.28)] backdrop-blur-sm'>
               <div className='grid h-44 w-44 place-items-center rounded-full border border-blue-300/20 bg-[#071b3f]/90 shadow-[inset_0_0_60px_rgba(59,130,246,.14)]'>
                 <img
-                  src='/vektor-logo.png'
+                  src='/logo/logo.png'
                   alt='Vektor'
-                  className='h-24 w-24 object-contain drop-shadow-[0_0_30px_rgba(96,165,250,.45)]'
+                  className='size-48 object-contain drop-shadow-[0_0_30px_rgba(96,165,250,.45)]'
                 />
               </div>
             </div>
@@ -122,7 +122,7 @@ const HomePage = () => {
             <div className='relative overflow-hidden rounded-4xl bg-[#06132e] p-8 shadow-2xl shadow-blue-950/15 sm:p-12'>
               <div className='absolute inset-0 bg-[linear-gradient(rgba(96,165,250,.08)_1px,transparent_1px),linear-gradient(90deg,rgba(96,165,250,.08)_1px,transparent_1px)] bg-size-[32px_32px]' />
               <div className='relative flex min-h-90 flex-col items-center justify-center text-center'>
-                <img src='/vektor-logo.png' alt='Vektor' className='h-28 w-28 object-contain' />
+                <img src='/logo/logo.png' alt='Vektor' className='size-36 object-contain' />
                 <strong className='mt-5 font-display text-3xl tracking-[.18em] text-white'>VEKTOR</strong>
                 <span className='mt-2 text-[10px] font-semibold tracking-[.3em] text-blue-300'>
                   LEARN · CONNECT · IMPACT
