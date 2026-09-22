@@ -5,6 +5,7 @@ import { galleryCards } from '../../../data/galleryCards';
 import { missions } from '../../../data/missons';
 import { programs } from '../../../data/program';
 import { statCards } from '../../../data/statCards';
+import { href } from 'react-router';
 
 const HomePage = () => {
   return (
@@ -42,12 +43,14 @@ const HomePage = () => {
             </p>
 
             <div className='mt-9 flex flex-col gap-3 sm:flex-row'>
-              <button
-                // onClick={() => nav('kontak')}
+              <a
+                href='https://docs.google.com/forms/d/e/1FAIpQLSc2kdipGtaCzMt4NS4xl3JsstqWOUi9dIJhha-A1hLbEnB3yA/viewform'
+                target='_blank'
+                rel='noopener noreferrer'
                 className='group flex items-center justify-center gap-3 rounded-full bg-blue-600 px-6 py-3.5 text-sm font-bold text-white shadow-xl shadow-blue-950/30 transition hover:-translate-y-1 hover:bg-blue-500'
               >
                 Bergabung Sekarang <ArrowUpRight size={16} />
-              </button>
+              </a>
 
               <button
                 // onClick={() => nav('tentang')}>
@@ -259,11 +262,10 @@ const HomePage = () => {
               return (
                 <Reveal key={program.label} direction='up'>
                   <article
-                    className={`group relative min-h-97.5 overflow-hidden rounded-4xl p-7 text-white shadow-xl shadow-slate-950/10 ${
-                      index % 2 === 0
-                        ? 'bg-linear-to-br from-[#0a2250] via-blue-800 to-blue-500'
-                        : 'bg-linear-to-br from-[#071a39] via-slate-800 to-blue-700'
-                    }`}
+                    className={`group relative min-h-97.5 overflow-hidden rounded-4xl p-7 text-white shadow-xl shadow-slate-950/10 ${index % 2 === 0
+                      ? 'bg-linear-to-br from-[#0a2250] via-blue-800 to-blue-500'
+                      : 'bg-linear-to-br from-[#071a39] via-slate-800 to-blue-700'
+                      }`}
                   >
                     <div className='absolute inset-0 bg-[linear-gradient(135deg,transparent_45%,rgba(255,255,255,.09)_45%,transparent_70%)] opacity-70' />
 
@@ -320,9 +322,8 @@ const HomePage = () => {
                 className={index === 0 ? 'lg:row-span-2' : ''}
               >
                 <div
-                  className={`group relative overflow-hidden rounded-4xl bg-linear-to-br ${card.gradient} ${
-                    index === 0 ? 'min-h-140' : 'min-h-67.5'
-                  }`}
+                  className={`group relative overflow-hidden rounded-4xl bg-linear-to-br ${card.gradient} ${index === 0 ? 'min-h-140' : 'min-h-67.5'
+                    }`}
                 >
                   <div className='absolute inset-0 bg-[radial-gradient(circle_at_70%_25%,rgba(255,255,255,.22),transparent_25%),linear-gradient(135deg,transparent_35%,rgba(255,255,255,.08)_35%,transparent_65%)]' />
 
@@ -359,7 +360,7 @@ const HomePage = () => {
               </p>
               <a
                 className='mt-8 inline-flex items-center gap-3 rounded-full bg-blue-600 px-6 py-3.5 text-sm font-bold text-white shadow-xl shadow-blue-950/30 transition hover:-translate-y-1 hover:bg-blue-500'
-                href='mailto:info@vektor.id'
+                href='https://docs.google.com/forms/d/e/1FAIpQLSc2kdipGtaCzMt4NS4xl3JsstqWOUi9dIJhha-A1hLbEnB3yA/viewform'
               >
                 Bergabung Sekarang <ArrowRight />
               </a>
