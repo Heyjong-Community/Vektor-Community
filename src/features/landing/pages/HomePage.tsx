@@ -1,11 +1,8 @@
 import { ArrowRight, ArrowUpRight, Heart, Play, Target, Users } from 'lucide-react';
 import Reveal from '../../../components/common/Reveal';
-import Stat from '../../../components/common/Stat';
 import { galleryCards } from '../../../data/galleryCards';
 import { missions } from '../../../data/missons';
 import { programs } from '../../../data/program';
-import { statCards } from '../../../data/statCards';
-import { href } from 'react-router';
 
 const HomePage = () => {
   return (
@@ -237,13 +234,13 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section className='bg-[#06132e] px-5 py-16 text-white sm:px-8 lg:px-10'>
+      {/* <section className='bg-[#06132e] px-5 py-16 text-white sm:px-8 lg:px-10'>
         <div className='mx-auto grid max-w-310 gap-8 sm:grid-cols-2 lg:grid-cols-4'>
           {statCards.map((item) => (
             <Stat key={item.label} icon={item.icon} number={item.number} label={item.label} />
           ))}
         </div>
-      </section>
+      </section> */}
 
       <section id='program' className='bg-slate-50 px-5 py-24 sm:px-8 sm:py-32 lg:px-10'>
         <div className='mx-auto max-w-310'>
