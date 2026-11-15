@@ -1,10 +1,14 @@
-import { ArrowLeftIcon, ArrowRightIcon, Star } from 'lucide-react';
+import { ArrowLeftIcon, ArrowRightIcon, AtSign, Eye, EyeOff, Lock, LockOpen, Star } from 'lucide-react';
+import { useState } from 'react';
 import { Link } from 'react-router';
 
 const LoginPage = () => {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   return (
     <div className='grid grid-cols-1 md:grid-cols-2 h-screen'>
-      <div className='flex flex-col justify-between bg-linear-to-br from-blue-600 via-blue-800 to-blue-900 p-4 md:p-6 lg:p-10 xl:p-16'>
+      <div className='hidden md:flex flex-col justify-between bg-linear-to-br from-blue-600 via-blue-800 to-blue-900 p-4 md:p-6 lg:p-10 xl:p-16'>
         {/* HEAD LEFT SIDE */}
         <div className='flex justify-between items-start'>
           {/* LOGO */}
@@ -38,7 +42,7 @@ const LoginPage = () => {
             para mentor.
           </p>
           {/* Review Card */}
-          <div className='mt-6 w-3/4 bg-white/10 rounded-xl p-5 border border-white/20 backdrop-blur-lg'>
+          <div className='mt-6 w-3/4 bg-white/10 rounded-xl p-5 border border-white/20 backdrop-blur-lg shadow-lg'>
             <div className='flex items-center gap-2.5'>
               <div className='flex items-center gap-1'>
                 <Star fill='#FCD34D' className='size-3 text-[#FCD34D]' />
@@ -55,7 +59,24 @@ const LoginPage = () => {
                 pulang membawa pemahaman nyata.”
               </p>
             </div>
-            <div className='mt-4 border-t border-white/10 pt-3'></div>
+            <div className='mt-4 border-t border-white/10 pt-3'>
+              <div className='flex items-center justify-between'>
+                <div className='flex items-center gap-2.5'>
+                  <div className='size-8 bg-white/10 border border-white/20 rounded-full flex items-center justify-center'>
+                    <p className='text-xs text-white font-bold'>TQ</p>
+                  </div>
+                  <div className=''>
+                    <p className='text-xs font-medium text-white'>Taqi Mundzir Burhanudin</p>
+                    <p className='text-[10px] text-white/50'>Mahasiswa UPNVJ</p>
+                  </div>
+                </div>
+                <div className=''>
+                  <span className='bg-white/10 border border-white/20 text-white py-0.5 px-2 rounded-sm text-[11px]'>
+                    Member Batch 1
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         {/* FOOT LEFT SIDE */}
@@ -91,7 +112,7 @@ const LoginPage = () => {
           </p>
         </div>
         {/* CENTER RIGHT SIDE */}
-        <div className='px-8 w-3/4 mx-auto'>
+        <div className='lg:px-8 w-full lg:w-3/4 mx-auto'>
           <h1 className='text-black font-bold text-3xl leading-9'>Masuk ke Akun</h1>
           <p className='mt-1.5 text-sm text-black/70'>
             Belum punya akun? Hubungi pengurus komunitas untuk mendapatkan akses belajar.
@@ -101,18 +122,55 @@ const LoginPage = () => {
               <label htmlFor='' className='text-black font-medium text-sm'>
                 Alamat Email <span className='text-red-600'>*</span>
               </label>
-              <input type='text' className='block mt-2 w-full rounded-lg px-4 py-2.5 border border-slate-400' />
+              <div className='relative flex items-center'>
+                <div className='pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4'>
+                  <AtSign className='h-5 w-5 text-slate-400' strokeWidth={1.75} />
+                </div>
+                <input
+                  id='email'
+                  type='email'
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder='nama@email.com'
+                  className='w-full rounded-xl border border-slate-200 bg-[#f8fafc] py-3.5 pl-12 pr-4 text-base text-slate-800 placeholder-slate-400 transition-colors focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20'
+                />
+              </div>
             </div>
             <div className='group-input'>
               <label htmlFor='' className='text-black font-medium text-sm'>
                 Password <span className='text-red-600'>*</span>
               </label>
-              <input
-                type='password'
-                className='block mt-2 w-full rounded-lg px-4 py-2.5 border border-slate-400'
-                placeholder='********'
-                // placeholder='••••••'
-              />
+              <div className='relative flex items-center'>
+                <div className='pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4'>
+                  {showPassword ? (
+                    <LockOpen className='h-5 w-5 text-slate-400' strokeWidth={1.75} />
+                  ) : (
+                    <Lock className='h-5 w-5 text-slate-400' strokeWidth={1.75} />
+                  )}
+                </div>
+                <input
+                  id='password'
+                  type={showPassword ? 'text' : 'password'}
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder='Masukkan kata sandi'
+                  className='w-full rounded-xl border border-slate-200 bg-[#f8fafc] py-3.5 pl-12 pr-12 text-base text-slate-800 placeholder-slate-400 transition-colors focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20'
+                />
+                <button
+                  type='button'
+                  onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? 'Sembunyikan kata sandi' : 'Lihat kata sandi'}
+                  className='absolute inset-y-0 right-0 flex items-center pr-4 text-slate-400 hover:text-slate-600 focus:outline-none'
+                >
+                  {showPassword ? (
+                    <EyeOff className='h-5 w-5' strokeWidth={1.75} />
+                  ) : (
+                    <Eye className='h-5 w-5' strokeWidth={1.75} />
+                  )}
+                </button>
+              </div>
             </div>
             <div className='flex items-center justify-between'></div>
             <button
