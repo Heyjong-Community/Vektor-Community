@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router';
 import HomePage from '../features/landing/pages/HomePage';
 import PublicRoutes from './publicRoutes';
 import LoginPage from '../features/auth/pages/LoginPage';
+import LearningPage from '../features/learning/pages/LearningPage';
 
 const router = createBrowserRouter([
   {
@@ -11,6 +12,10 @@ const router = createBrowserRouter([
       {
         index: true,
         Component: HomePage,
+      },
+      {
+        path: 'learning',
+        Component: LearningPage,
       },
     ],
   },
