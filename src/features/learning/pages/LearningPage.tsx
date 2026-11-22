@@ -1,3 +1,5 @@
+import CardLearn from '../../../components/CardLearn';
+
 const LearningPage = () => {
   return (
     <main>
@@ -67,7 +69,9 @@ const LearningPage = () => {
               TailwindCSS
             </button>
           </div>
-          <div className='mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 bg-blue-900 h-60'></div>
+          <div className='mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+            <CardLearn />
+          </div>
         </div>
       </section>
     </main>
