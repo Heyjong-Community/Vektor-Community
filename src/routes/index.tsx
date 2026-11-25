@@ -3,6 +3,7 @@ import HomePage from '../features/landing/pages/HomePage';
 import PublicRoutes from './publicRoutes';
 import LoginPage from '../features/auth/pages/LoginPage';
 import LearningPage from '../features/learning/pages/LearningPage';
+import RecruitMember from '@/features/recruit/pages/RecruitMember';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
         Component: LearningPage,
       },
     ],
+  },
+  {
+    path: '/oprec',
+    Component: RecruitMember,
   },
   {
     path: '/login',
