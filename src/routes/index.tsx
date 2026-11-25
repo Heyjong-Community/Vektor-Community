@@ -3,6 +3,8 @@ import HomePage from '../features/landing/pages/HomePage';
 import PublicRoutes from './publicRoutes';
 import LoginPage from '../features/auth/pages/LoginPage';
 import LearningPage from '../features/learning/pages/LearningPage';
+import DashboardRoutes from './dashboardRoutes';
+import MainDashboardPage from '@/features/dashboard/pages/MainDashboardPage';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +24,16 @@ const router = createBrowserRouter([
   {
     path: '/login',
     Component: LoginPage,
+  },
+  {
+    path: '/dashboard',
+    Component: DashboardRoutes,
+    children: [
+      {
+        index: true,
+        Component: MainDashboardPage,
+      },
+    ],
   },
 ]);
 
