@@ -1,6 +1,30 @@
+import { dummyCourses, TOPIC_CATEGORIES } from '@/data/courses';
 import CardLearn from '../../../components/CardLearn';
+import SearchFilterBar from '@/components/common/SearchFilter';
+import { useMemo, useState } from 'react';
 
 const LearningPage = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('Semua');
+  const [sortBy, setSortBy] = useState<'default' | 'highest-rating' | 'most-reviewed'>('default');
+
+  const filteredCourses = useMemo(() => {
+    return dummyCourses
+      .filter((course) => {
+        const matchesSearch =
+          course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          course.tutor.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesCategory = selectedCategory === 'Semua' || course.category === selectedCategory;
+
+        return matchesSearch && matchesCategory;
+      })
+      .sort((a, b) => {
+        if (sortBy === 'highest-rating') return b.rating - a.rating;
+        if (sortBy === 'most-reviewed') return b.reviewCount - a.reviewCount;
+        return 0;
+      });
+  }, [searchQuery, selectedCategory, sortBy]);
+
   return (
     <main>
       <section id='home' className='relative overflow-hidden bg-[#06132e] pt-28 text-white h-fit'>
@@ -25,53 +49,48 @@ const LearningPage = () => {
       </section>
       <section className='px-5 py-24 sm:px-8 sm:py-32 lg:px-10'>
         <div className='mx-auto max-w-310'>
-          <div className='flex items-center justify-between'>
-            <input
-              id='search'
-              type='text'
-              required
-              placeholder='Cari kelas'
-              className='w-96 rounded-xl border border-slate-200 bg-[#f8fafc] py-3.5 pl-3 pr-4 text-base text-slate-800 placeholder-slate-400 transition-colors focus:border-blue-500 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500/20'
-            />
-            <div className=''>
-              <button>Filter</button>
+          <SearchFilterBar
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            selectedCategory={selectedCategory}
+            onCategoryChange={setSelectedCategory}
+            sortBy={sortBy}
+            onSortChange={setSortBy}
+          />
+          <div className='mt-6 flex items-center gap-2.5 overflow-x-auto pb-2 no-scrollbar'>
+            {TOPIC_CATEGORIES.map((category) => {
+              const isActive = selectedCategory === category;
+
+              return (
+                <button
+                  key={category}
+                  type='button'
+                  onClick={() => setSelectedCategory(category)}
+                  className={`shrink-0 rounded-full px-4.5 py-2 text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
+                    isActive
+                      ? 'bg-blue-700 text-white shadow-md shadow-blue-700/25 -translate-y-0.5'
+                      : 'bg-slate-100 text-slate-600 hover:bg-blue-50 hover:text-blue-700'
+                  }`}
+                >
+                  {category}
+                </button>
+              );
+            })}
+          </div>
+          {filteredCourses.length > 0 ? (
+            <div className='mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+              {filteredCourses.map((course) => (
+                <CardLearn key={course.id} {...course} />
+              ))}
             </div>
-          </div>
-          <div className='mt-7 flex items-stretch gap-4'>
-            <button
-              type='button'
-              className='text-sm text-black px-4 py-1.5 bg-slate-100 hover:bg-blue-500 hover:text-white duration-300 transition hover:-translate-y-1 hover:shadow-blue-500/50 hover:shadow-lg rounded-full'
-            >
-              Semua
-            </button>
-            <button
-              type='button'
-              className='text-sm text-black px-4 py-1.5 bg-slate-100 hover:bg-blue-500 hover:text-white duration-300 transition hover:-translate-y-1 rounded-full hover:shadow-blue-500/50 hover:shadow-lg'
-            >
-              HTML
-            </button>
-            <button
-              type='button'
-              className='text-sm text-black px-4 py-1.5 bg-slate-100 hover:bg-blue-500 hover:text-white duration-300 transition hover:-translate-y-1 rounded-full hover:shadow-blue-500/50 hover:shadow-lg'
-            >
-              CSS
-            </button>
-            <button
-              type='button'
-              className='text-sm text-black px-4 py-1.5 bg-slate-100 hover:bg-blue-500 hover:text-white duration-300 transition hover:-translate-y-1 rounded-full hover:shadow-blue-500/50 hover:shadow-lg'
-            >
-              Javascript
-            </button>
-            <button
-              type='button'
-              className='text-sm text-black px-4 py-1.5 bg-slate-100 hover:bg-blue-500 hover:text-white duration-300 transition hover:-translate-y-0.5 rounded-full hover:shadow-blue-500/50 hover:shadow-lg'
-            >
-              TailwindCSS
-            </button>
-          </div>
-          <div className='mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-            <CardLearn />
-          </div>
+          ) : (
+            <div className='mt-8 text-center py-16 px-4 rounded-2xl border border-dashed border-slate-200 bg-slate-50/50'>
+              <p className='text-base font-semibold text-slate-800'>Kelas tidak ditemukan</p>
+              <p className='text-xs text-slate-500 mt-1'>
+                Coba gunakan kata kunci lain atau reset filter kategori yang dipilih.
+              </p>
+            </div>
+          )}
         </div>
       </section>
     </main>
